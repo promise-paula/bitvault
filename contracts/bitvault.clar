@@ -305,3 +305,21 @@
     (ok true)
   )
 )
+
+;; Read-Only Functions
+(define-read-only (get-latest-btc-price)
+  (map-get? last-btc-price 
+    {
+      timestamp: stacks-block-height,
+      price: u0
+    }
+  )
+)
+
+(define-read-only (get-vault-details (vault-owner principal) (vault-id uint))
+  (map-get? vaults {owner: vault-owner, id: vault-id})
+)
+
+(define-read-only (get-total-supply)
+  (var-get total-supply)
+)
